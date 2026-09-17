@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IE Manpower Forecast & Capacity Report - IEC Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark: #040406;
+      --card-bg: #1C1D22;
+      --card-inner: #131316;
+      --border-color: #524437;
+      --text-main: #e5e1e6;
+      --text-muted: #d7c3b2;
+      --accent-gold: #ffb86b;
+      --accent-cyan: #5de6ff;
+      --accent-green: #4edea3;
+      --accent-warn: #F59E0B;
+      --accent-rose: #F43F5E;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      padding: 2rem;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-b: 1px solid var(--border-color);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      background: var(--accent-gold);
+      color: #492900;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      opacity: 0.8;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    button {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .btn-primary {
+      background: var(--accent-gold);
+      color: #492900;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      color: #492900;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    }
+
+    .kpi-title {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .kpi-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-main);
+    }
+
+    .kpi-sub {
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .text-gold { color: var(--accent-gold); }
+    .text-cyan { color: var(--accent-cyan); }
+    .text-green { color: var(--accent-green); }
+    .text-warn { color: var(--accent-warn); }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-b: 1px solid rgba(82, 68, 55, 0.5);
+      padding-bottom: 0.75rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(82, 68, 55, 0.4);
+    }
+
+    th {
+      background: var(--card-inner);
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    td.mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    td.right, th.right {
+      text-align: right;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-warn {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-warn);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-green {
+      background: rgba(78, 222, 163, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(78, 222, 163, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 2rem;
+      border-t: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      .kpi-card, .section-card {
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: none;
+      }
+      th {
+        background: #f0f0f0;
+        color: #333;
+      }
+      .btn-group {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-section">
+        <div class="logo-badge">IEC</div>
+        <div>
+          <h1>IE Manpower Forecast & Maintenance Executive Report</h1>
+          <div class="subtitle">Generated: July 2026 | Site Operations Desk</div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button onclick="window.print()">
+          <span class="material-symbols-outlined">print</span> Print / Save PDF
+        </button>
+        <button class="btn-primary" onclick="alert('Report data exported successfully.')">
+          <span class="material-symbols-outlined">download</span> Export Data
+        </button>
+      </div>
+    </header>
+
+    <!-- Key Executive KPIs -->
+    <div class="grid-4">
+      <div class="kpi-card">
+        <div class="kpi-title">Global Target DL Requirement</div>
+        <div class="kpi-value text-cyan">3,980 <span style="font-size:1rem;">DL</span></div>
+        <div class="kpi-sub text-muted">Sum of Taoyuan, Kunshan, Vietnam</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Global Actual HR Headcount</div>
+        <div class="kpi-value text-gold">3,590 <span style="font-size:1rem;">DL</span></div>
+        <div class="kpi-sub text-muted">Verified HR Roster Headcount</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Net Capacity Gap (Deficit)</div>
+        <div class="kpi-value text-warn">-390 <span style="font-size:1rem;">DL</span></div>
+        <div class="kpi-sub text-warn">Cross-site manpower shortage</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Global IDL Allocated</div>
+        <div class="kpi-value text-green">898 <span style="font-size:1rem;">IDL</span></div>
+        <div class="kpi-sub text-green">IDL:DL Ratio 1:4.1 Standard</div>
+      </div>
+    </div>
+
+    <!-- Manufacturing Plant Summary Table -->
+    <div class="section-card">
+      <div class="section-title">
+        <span class="material-symbols-outlined text-gold">factory</span>
+        Multi-Plant Capacity & Headcount Status
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Plant Name</th>
+            <th>Site Code</th>
+            <th class="right">Target DL Demand</th>
+            <th class="right">Actual HR DL</th>
+            <th class="right">Net Capacity Gap</th>
+            <th class="right">Target IDL</th>
+            <th class="right">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Taoyuan Plant Alpha</strong></td>
+            <td class="mono">TY-01</td>
+            <td class="mono right">1,450 DL</td>
+            <td class="mono right">1,228 DL</td>
+            <td class="mono right text-warn">-222 DL</td>
+            <td class="mono right">354 IDL</td>
+            <td class="right"><span class="badge badge-warn">DEFICIT</span></td>
+          </tr>
+          <tr>
+            <td><strong>Kunshan Main Hub</strong></td>
+            <td class="mono">KS-02</td>
+            <td class="mono right">1,680 DL</td>
+            <td class="mono right">1,540 DL</td>
+            <td class="mono right text-warn">-140 DL</td>
+            <td class="mono right">410 IDL</td>
+            <td class="right"><span class="badge badge-warn">DEFICIT</span></td>
+          </tr>
+          <tr>
+            <td><strong>Vietnam Site 1</strong></td>
+            <td class="mono">VN-03</td>
+            <td class="mono right">850 DL</td>
+            <td class="mono right">822 DL</td>
+            <td class="mono right text-warn">-28 DL</td>
+            <td class="mono right">207 IDL</td>
+            <td class="right"><span class="badge badge-warn">DEFICIT</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- APS Production Line Allocation Breakdown -->
+    <div class="section-card">
+      <div class="section-title">
+        <span class="material-symbols-outlined text-cyan">precision_manufacturing</span>
+        APS Line Standards & Manpower Allocation
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Assembly Line</th>
+            <th>Target Product</th>
+            <th class="right">Cycle Time (s)</th>
+            <th class="right">Line Standard DL</th>
+            <th class="right">Assigned DL</th>
+            <th class="right">Line Efficiency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Line A1 - SMT Assembly</strong></td>
+            <td>High-Speed Server Board</td>
+            <td class="mono right">18.5s</td>
+            <td class="mono right">320 DL</td>
+            <td class="mono right">290 DL</td>
+            <td class="mono right text-green">94.8%</td>
+          </tr>
+          <tr>
+            <td><strong>Line B2 - DIP Insertion</strong></td>
+            <td>Industrial Power Module</td>
+            <td class="mono right">24.0s</td>
+            <td class="mono right">410 DL</td>
+            <td class="mono right">385 DL</td>
+            <td class="mono right text-green">92.1%</td>
+          </tr>
+          <tr>
+            <td><strong>Line C3 - Testing & Packaging</strong></td>
+            <td>Automotive ECU Unit</td>
+            <td class="mono right">15.2s</td>
+            <td class="mono right">270 DL</td>
+            <td class="mono right">245 DL</td>
+            <td class="mono right text-green">96.4%</td>
+          </tr>
+          <tr>
+            <td><strong>Line D4 - Final System Integration</strong></td>
+            <td>AI Compute Chassis</td>
+            <td class="mono right">45.0s</td>
+            <td class="mono right">450 DL</td>
+            <td class="mono right">308 DL</td>
+            <td class="mono right text-warn">88.5%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SMT to PCA Continuity Schedule Section -->
+    <div class="section-card">
+      <div class="section-title">
+        <span class="material-symbols-outlined text-gold">hub</span>
+        SMT ➔ PCA 連貫製程排程與動態人力需求標準 (Continuous Process & SMT/PCA Pairing)
+      </div>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">
+        APS 連貫排程依據 1:1 產線連動關係：SMT 開線即刻接續連帶開動對應 PCA 線別，當日總需求人力 = (SMT 班數 × SMT Std DL) + (PCA 班數 × PCA Std DL)。
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>連動產線 (SMT ➔ PCA)</th>
+            <th class="center">所屬廠別</th>
+            <th class="right">SMT 標準DL</th>
+            <th class="right">PCA 標準DL</th>
+            <th class="right">連貫合計 / 班</th>
+            <th class="right">8月總排產量</th>
+            <th class="center">開線天數</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S21</strong> ➔ <strong style="color:var(--accent-green);">P21</strong></td>
+            <td class="mono center">TP05</td>
+            <td class="mono right">6 DL</td>
+            <td class="mono right">18 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">24 DL / 班</td>
+            <td class="mono right">20,534 pcs</td>
+            <td class="mono center">17 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S22</strong> ➔ <strong style="color:var(--accent-green);">P22</strong></td>
+            <td class="mono center">TP05</td>
+            <td class="mono right">6 DL</td>
+            <td class="mono right">18 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">24 DL / 班</td>
+            <td class="mono right">17,468 pcs</td>
+            <td class="mono center">16 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S23</strong> ➔ <strong style="color:var(--accent-green);">P23</strong></td>
+            <td class="mono center">TP05</td>
+            <td class="mono right">5 DL</td>
+            <td class="mono right">16 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">21 DL / 班</td>
+            <td class="mono right">23,970 pcs</td>
+            <td class="mono center">18 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S24</strong> ➔ <strong style="color:var(--accent-green);">P24</strong></td>
+            <td class="mono center">TP05</td>
+            <td class="mono right">5 DL</td>
+            <td class="mono right">16 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">21 DL / 班</td>
+            <td class="mono right">11,850 pcs</td>
+            <td class="mono center">11 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S25</strong> ➔ <strong style="color:var(--accent-green);">P25</strong></td>
+            <td class="mono center">TP05</td>
+            <td class="mono right">6 DL</td>
+            <td class="mono right">18 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">24 DL / 班</td>
+            <td class="mono right">8,780 pcs</td>
+            <td class="mono center">8 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S26</strong> ➔ <strong style="color:var(--accent-green);">P26</strong></td>
+            <td class="mono center">TP05</td>
+            <td class="mono right">6 DL</td>
+            <td class="mono right">18 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">24 DL / 班</td>
+            <td class="mono right">2,284 pcs</td>
+            <td class="mono center">4 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S01</strong> ➔ <strong style="color:var(--accent-green);">P01</strong></td>
+            <td class="mono center">TP08</td>
+            <td class="mono right">6 DL</td>
+            <td class="mono right">18 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">24 DL / 班</td>
+            <td class="mono right">8,820 pcs</td>
+            <td class="mono center">8 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S02</strong> ➔ <strong style="color:var(--accent-green);">P02</strong></td>
+            <td class="mono center">TP08</td>
+            <td class="mono right">5 DL</td>
+            <td class="mono right">16 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">21 DL / 班</td>
+            <td class="mono right">4,710 pcs</td>
+            <td class="mono center">5 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S03</strong> ➔ <strong style="color:var(--accent-green);">P03</strong></td>
+            <td class="mono center">TP08</td>
+            <td class="mono right">6 DL</td>
+            <td class="mono right">18 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">24 DL / 班</td>
+            <td class="mono right">13,380 pcs</td>
+            <td class="mono center">13 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S06</strong> ➔ <strong style="color:var(--accent-green);">P06</strong></td>
+            <td class="mono center">TP11</td>
+            <td class="mono right">6 DL</td>
+            <td class="mono right">18 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">24 DL / 班</td>
+            <td class="mono right">14,240 pcs</td>
+            <td class="mono center">12 天</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent-gold);">S07</strong> ➔ <strong style="color:var(--accent-green);">P07</strong></td>
+            <td class="mono center">TP11</td>
+            <td class="mono right">6 DL</td>
+            <td class="mono right">18 DL</td>
+            <td class="mono right font-bold" style="color:var(--accent-cyan);">24 DL / 班</td>
+            <td class="mono right">14,640 pcs</td>
+            <td class="mono center">14 天</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- System Audit Footer -->
+    <footer>
+      IE System Operations • Industrial Engineering & Capacity Analytics • Confidential Document
+    </footer>
+  </div>
+</body>
+</html>

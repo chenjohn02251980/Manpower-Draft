@@ -1,0 +1,6 @@
+{
+  "name": "IE Manpower Forecast & Maintenance",
+  "description": "Workforce Central IE Manpower Forecast & Maintenance dashboard with APS Demand engine, SMT-PCA process continuity coupling, line standards, and capacity gap calculation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
