@@ -993,7 +993,7 @@ export const IEHistoricalManpowerOverview: React.FC<IEHistoricalManpowerOverview
                           {timeDimension === 'monthly' ? 'Monthly View' : 'Yearly Drill-Down'}
                         </span>
                         <h4 className="text-base sm:text-lg font-bold font-['Inter'] text-[#e5e1e6]">
-                          [FY{selectedDrillYear}] Jan ~ Dec Manpower & Seasonality
+                          Manpower
                         </h4>
                         {selectedYearObj?.isCurrent && (
                           <span className="px-2 py-0.5 rounded text-[10px] font-['JetBrains_Mono'] font-bold bg-[#4edea3]/20 text-[#4edea3] border border-[#4edea3]/40">

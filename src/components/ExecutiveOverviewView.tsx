@@ -405,7 +405,7 @@ export const ExecutiveOverviewView: React.FC<ExecutiveOverviewViewProps> = ({
         <div className="bg-[#1C1D22] border border-[#524437]/60 rounded-lg p-6">
           <h4 className="font-['Inter'] text-base font-semibold text-[#e5e1e6] flex items-center gap-2 mb-4">
             <span className="material-symbols-outlined text-[#ffb86b]">bar_chart</span>
-            Process Cost Center Paid Headcount vs APS Demand (Process Breakdown)
+            Process Cost Center Paid Headcount vs APS Demand
           </h4>
           <div className="w-full h-[280px] bg-[#131316]/60 border border-[#524437]/30 rounded-lg p-3">
             <ResponsiveContainer width="100%" height="100%">
@@ -553,7 +553,7 @@ export const ExecutiveOverviewView: React.FC<ExecutiveOverviewViewProps> = ({
               </tr>
               <tr className="border-b border-[#524437]/40 bg-[#18181c] text-[10px]">
                 <th className="p-2 text-right border-r border-[#524437]/20 text-[#38bdf8]">SMT Volume (pcs)</th>
-                <th className="p-2 text-right border-r border-[#524437]/40 text-[#a78bfa]">CPU Volume (pcs)</th>
+                <th className="p-2 text-right border-r border-[#524437]/40 text-[#a78bfa]">CPU Volume (Units)</th>
                 <th className="p-2 text-right border-r border-[#524437]/20 text-[#ffb86b]">DL</th>
                 <th className="p-2 text-right border-r border-[#524437]/20 text-[#fb923c]">IDL</th>
                 <th className="p-2 text-right border-r border-[#524437]/40 text-[#ffb86b] font-bold bg-[#ffb86b]/10">Total</th>
@@ -706,7 +706,7 @@ export const ExecutiveOverviewView: React.FC<ExecutiveOverviewViewProps> = ({
                   <tr>
                     <td className="p-3 text-[#e5e1e6] border-r border-[#524437]/40 flex items-center gap-1.5">
                       <span className="material-symbols-outlined text-sm text-[#ffb86b]">corporate_fare</span>
-                      <span>TOTAL (Enterprise Consolidated)</span>
+                      <span>TOTAL</span>
                     </td>
                     <td className="p-2.5 text-right text-[#38bdf8] border-r border-[#524437]/20">
                       {(totals?.smtVolume ?? 0).toLocaleString()}

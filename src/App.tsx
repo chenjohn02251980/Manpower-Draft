@@ -265,7 +265,7 @@ export default function App() {
         />
 
         {/* Content Area */}
-        <div className="flex-grow overflow-y-auto p-10 custom-scrollbar">
+        <div className="flex-grow overflow-y-auto p-6 lg:p-8 xl:p-10 max-w-[1920px] w-full mx-auto custom-scrollbar">
           {/* Summary KPIs bar */}
           <SummaryCards
             metrics={metrics}

@@ -51,7 +51,7 @@ export const Header: React.FC<HeaderProps> = ({
         return 'Global IE Feedback & Revisions';
       case 'ie_forecast':
       default:
-        return 'IE Standard Manpower & Maintenance';
+        return 'IE Standard Manpower';
     }
   };
 

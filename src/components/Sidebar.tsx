@@ -19,7 +19,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { id: 'aps_demand', label: 'APS DEMAND', icon: 'precision_manufacturing' },
     { id: 'hr_actual', label: 'HR ACTUAL', icon: 'groups' },
     { id: 'ie_forecast', label: 'IE STANDARD', icon: 'analytics' },
-    { id: 'global_feedback', label: 'GLOBAL FEEDBACK', icon: 'public' },
   ];
 
   return (
